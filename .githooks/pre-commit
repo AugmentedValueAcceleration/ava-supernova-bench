@@ -1,0 +1,15 @@
+#!/bin/sh
+# Pre-commit secret gate for a PUBLIC repo — prevention, before anything enters
+# history. Enable once per clone:  git config core.hooksPath .githooks
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --redact --no-banner || {
+    echo ""
+    echo "gitleaks: a secret was detected in your staged changes — commit blocked."
+    echo "Remove it (and rotate it if it was ever real) before committing."
+    exit 1
+  }
+else
+  echo "WARNING: gitleaks not on PATH — pre-commit secret scan SKIPPED."
+  echo "Install it (winget install Gitleaks.Gitleaks) so this layer is active."
+fi
+exit 0

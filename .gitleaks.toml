@@ -1,0 +1,9 @@
+# ava-supernova-bench — secret-scan config.
+# This repo is PUBLIC, so the gate is strict: any real secret trips the scan.
+# Extends gitleaks' default ruleset. Add an [allowlist] block ONLY when a
+# vetted false positive appears, with real entries + a justification — an
+# empty allowlist block is invalid (gitleaks rejects it).
+title = "ava-supernova-bench secret scan"
+
+[extend]
+useDefault = true

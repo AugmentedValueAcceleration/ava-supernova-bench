@@ -1,0 +1,18 @@
+{
+  "id": "001-fix-retry-count",
+  "bench_version": "bench-v1",
+  "title": "Fix the retry count off-by-one",
+  "description": "A retry utility runs one fewer attempt than requested, so one test fails. Fix src/retry.js so the whole suite passes, without modifying any test file.",
+  "categories": ["tool_reliability", "edit_precision", "instruction_adherence", "cost_per_success", "latency"],
+  "workspace": "tasks/bench-v1/001-fix-retry-count/workspace",
+  "prompt": "The test suite for `src/retry.js` has a failing test: `retry()` makes one fewer attempt than it was asked for. Fix `src/retry.js` so the whole suite passes. Do not modify any test file.",
+  "checks": [
+    { "kind": "command", "run": "node --test", "expect_exit": 0, "category": "edit_precision" },
+    { "kind": "tool_called", "tool": "file_edit", "args_match": "retry\\.js", "category": "tool_reliability" },
+    { "kind": "file", "path": "test/retry.test.js", "matches": "assert\\.equal\\(calls, 3\\)", "category": "instruction_adherence" }
+  ],
+  "judge": [
+    { "category": "edit_precision", "rubric": "Was the change minimal and scoped to the loop bound (the off-by-one), rather than a rewrite of retry()?" },
+    { "category": "instruction_adherence", "rubric": "Were all test files left unmodified, as the prompt required?" }
+  ]
+}

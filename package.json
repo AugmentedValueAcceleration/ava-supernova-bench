@@ -1,0 +1,13 @@
+{
+  "name": "ava-supernova-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Public benchmark runner + tasks + receipts for the Ava Supernova fleets and the models behind them.",
+  "scripts": {
+    "bench:run": "node runner/run.mjs"
+  },
+  "dependencies": {
+    "@ava-supernova/core": "^0.2.1"
+  }
+}
